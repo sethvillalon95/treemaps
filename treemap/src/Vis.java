@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -19,14 +20,12 @@ import java.util.Collections;
 import javax.swing.JPanel;
 
 
+
 public class Vis extends JPanel implements MouseListener, MouseMotionListener {
 
     private String textToDisplay;
-    private Map<String, Double> data;
-    private Map<String, Double> relativeData;
-    private Ellipse2D.Double seth;
-    private Rectangle box;
-    private Point corner;
+    private String filepath;
+    AllNodes nodes;
 //    private List<Point2D> scatterData;
 
     
@@ -37,17 +36,30 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
 //        textToDisplay = "There's nothing to see here.";
         addMouseListener(this);
         addMouseMotionListener(this);
-        
+        filepath = "";
+        nodes = new AllNodes();
 
 
     }
     
+    public void setFilePath(String fp) {
+    	filepath = fp;
+    	System.out.println(fp);
+    	
+    }
     // this is used for hover effects 
  
 
     @Override
     public void paintComponent(Graphics g1) {
         Graphics2D g = (Graphics2D)g1;
+        
+        File f = new File(filepath);
+        
+        nodes.newNode(f);
+        
+        
+        
        
 
         
@@ -83,9 +95,7 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        box = null;
 
-        repaint();
     }
 
     @Override
@@ -102,7 +112,6 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
     public void mouseDragged(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
-        box.setFrameFromDiagonal(corner.x, corner.y, x, y);
         repaint();
     }
 

@@ -15,8 +15,8 @@ import javax.swing.JMenuItem;
 public class Main extends JFrame {
 
     private Vis mainPanel;
-    String columnX;
-    String columnY;
+    // default
+	String filepath = "C:\\Users\\sethv\\OneDrive\\Desktop\\Job Application";
 
     public Main() {
 
@@ -56,6 +56,7 @@ public class Main extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Just clicked menu item 1");
+                mainPanel.setFilePath(filepath);
 
             }
         });
