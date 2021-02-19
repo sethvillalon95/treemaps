@@ -20,4 +20,10 @@ public class AllNodes {
 		}
 	}
 	
+	public void printAll() {
+		for(var n : Nodes) {
+			n.printAll();
+		}
+	}
+	
 }

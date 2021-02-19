@@ -57,11 +57,9 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
         File f = new File(filepath);
         
         nodes.newNode(f);
+        nodes.printAll();
         
         
-        
-       
-
         
 
         //draw blank background
