@@ -20,12 +20,18 @@ public class Node {
 		if(f.isFile()) {
 			size =(int)f.length();
 		}else {
-			File[] kids = f.listFiles();
-			for(var k: kids) {
-				Node a = new Node(k);
-				children.add(a);
-				size+=a.getSize();
+			try {
+				File[] kids = f.listFiles();
+				for(var k: kids) {
+					Node a = new Node(k);
+					children.add(a);
+					size+=a.getSize();
+				}
+			}catch (Exception e) {
+				System.out.println(e.getMessage());
+//				e.getMessage();
 			}
+			
 		}
 		
 	}
@@ -36,7 +42,7 @@ public class Node {
 
 	public void printAll() {
 		// TODO Auto-generated method stub
-	System.out.println("name: "+name);
+	System.out.println("name: "+name + " size: "+ size);
 	if(!children.isEmpty()) {
 		for(var n:children) {
 			n.printAll();
