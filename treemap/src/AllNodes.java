@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -25,5 +26,11 @@ public class AllNodes {
 			n.printAll();
 		}
 	}
+	public void draw(Graphics g, double x, double y,int w, int h, Orientation o) {
+		for(var n: Nodes) {
+			n.draw(g, x, y, w, h, o);
+		}
+	}
+	
 	
 }

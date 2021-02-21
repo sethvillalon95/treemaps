@@ -26,6 +26,7 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
     private String textToDisplay;
     private String filepath;
     AllNodes nodes;
+    Orientation orientation;
 //    private List<Point2D> scatterData;
 
     
@@ -38,6 +39,13 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
         addMouseMotionListener(this);
         filepath = "";
         nodes = new AllNodes();
+        
+        Orientation orientation = Orientation.HORIZONTAL;
+        
+        if(orientation == Orientation.VERTICAL) {
+            System.out.println(orientation);
+
+        }
 
 
     }
@@ -57,7 +65,7 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
         File f = new File(filepath);
         
         nodes.newNode(f);
-        nodes.printAll();
+//        nodes.printAll();
         
         
         
@@ -71,10 +79,7 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
 
         final int h = getHeight();
         final int w = getWidth();
-
-
-
-
+        nodes.draw(g, 0, 0, w, h, orientation.HORIZONTAL);
 
 
 
