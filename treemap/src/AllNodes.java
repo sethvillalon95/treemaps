@@ -20,7 +20,9 @@ public class AllNodes {
 			Nodes.clear();
 		}
 	}
-	
+	public void printSize() {
+		System.out.println("The size in the AllNodes is "+Nodes.size());
+	}
 	public void printAll() {
 		for(var n : Nodes) {
 			n.printAll();

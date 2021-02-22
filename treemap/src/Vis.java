@@ -21,11 +21,13 @@ import javax.swing.JPanel;
 
 
 
+
 public class Vis extends JPanel implements MouseListener, MouseMotionListener {
 
     private String textToDisplay;
     private String filepath;
-    AllNodes nodes;
+//    AllNodes nodes;
+    Node root; 
     Orientation orientation;
 //    private List<Point2D> scatterData;
 
@@ -38,8 +40,7 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
         addMouseListener(this);
         addMouseMotionListener(this);
         filepath = "";
-        nodes = new AllNodes();
-        
+//        nodes = new AllNodes();
         Orientation orientation = Orientation.HORIZONTAL;
         
         if(orientation == Orientation.VERTICAL) {
@@ -62,9 +63,8 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
     public void paintComponent(Graphics g1) {
         Graphics2D g = (Graphics2D)g1;
         
-        File f = new File(filepath);
         
-        nodes.newNode(f);
+//        nodes.newNode(f);
 //        nodes.printAll();
         
         
@@ -77,10 +77,14 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
         //render visualization
         g.setColor(Color.BLACK);
 
-        final int h = getHeight();
-        final int w = getWidth();
-        nodes.draw(g, 0, 0, w, h, orientation.HORIZONTAL);
-
+        final double h = getHeight();
+        final double w = getWidth();
+        File f = new File(filepath);
+        root = new Node(f);
+        root.draw(g, 0, 0, w, h, orientation.HORIZONTAL);
+//        nodes.draw(g, 0, 0, w, h, orientation.HORIZONTAL);
+//        nodes.printSize();
+//        nodes.clearNodes();
 
 
     }
