@@ -73,14 +73,15 @@ public class Node {
 	public void draw(Graphics g, double x, double y,double w, double h, Orientation o) {
 		// to do later. 
 //		Graphics2D g = (Graphics2D)g1;
-		if (isFile) {
-			g.setColor(Color.black);
-			g.drawRect((int)x, (int)y, (int)w, (int)h);
-			
+		if (isFile) {//file
+			g.setColor(Color.red);
+//			g.drawRect((int)x, (int)y, (int)w, (int)h);
+			g.fillRect((int)x, (int)y, (int)w, (int)h);
+
 //			g.setColor(Color.red);
 //			g.fillRect((int)x, (int)y, (int)w, (int)h);
 //			
-			double thickness = 2;
+//			double thickness = 2;
 
 //			Stroke oldStroke = g.getStroke();
 //			g.setStroke(new BasicStroke(thickness));
@@ -90,7 +91,7 @@ public class Node {
 //			g.setColor(Color.WHITE);
 //			g.drawLine((int)x, (int)y, (int)w, (int)h);
 			System.out.println("Drawn at x: "+x+" and y: "+y);
-		}else {
+		}else {//folder
 			try {
 				if(o==horizontal) { 
 //					double childWidth=0;
@@ -108,12 +109,7 @@ public class Node {
 						System.out.println(y);
 
 						c.draw(g, x, y, childWidth, h, vertical);
-						
-//						Part of brother Draper's code
-						x+=childWidth;
-						 
-						
-						 
+						x+=childWidth+1;
 //						System.out.println("x is : "+x+ "y is: "+ y);
 					}
 				}else {
@@ -131,7 +127,7 @@ public class Node {
 						System.out.println(y);
 						c.draw(g, x, y, w, childHeight, horizontal);
 //						uncomment later
-						y+=childHeight;
+						y+=childHeight+1;
 					}
 				}
 			} catch (Exception e) {

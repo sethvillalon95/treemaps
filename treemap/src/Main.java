@@ -64,6 +64,7 @@ public class Main extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Just clicked menu item 1");
                 mainPanel.file =f;
+                repaint();
 //                mainPanel.setFilePath(filepath);
 
             }
@@ -74,8 +75,10 @@ public class Main extends JFrame {
                 System.out.println("Just clicked menu item 2");
                 JFileChooser chooser = new JFileChooser();
                 chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                // show open dialog method
                 chooser.showDialog(mainPanel,"Open");
                 File tf = chooser.getSelectedFile();
+                // pass in
 //                filepath = tf;
                 System.out.println(tf);
             }

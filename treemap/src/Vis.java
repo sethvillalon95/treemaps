@@ -76,7 +76,7 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
         g.fillRect(0, 0, getWidth(), getHeight());
 
         //render visualization
-        g.setColor(Color.BLACK);
+//        g.setColor(Color.BLACK);
 
         final double h = getHeight();
         final double w = getWidth();
