@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -64,6 +65,9 @@ public class Main extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Just clicked menu item 2");
+                JFileChooser chooser = new JFileChooser();
+                chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                chooser.showDialog(mainPanel,"Open");
 
             }
         });

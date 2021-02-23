@@ -1,4 +1,8 @@
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Stroke;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -68,8 +72,23 @@ public class Node {
 	
 	public void draw(Graphics g, double x, double y,double w, double h, Orientation o) {
 		// to do later. 
+//		Graphics2D g = (Graphics2D)g1;
 		if (isFile) {
-			g.fillRect((int)x, (int)y, (int)w, (int)h);
+			g.setColor(Color.black);
+			g.drawRect((int)x, (int)y, (int)w, (int)h);
+			
+//			g.setColor(Color.red);
+//			g.fillRect((int)x, (int)y, (int)w, (int)h);
+//			
+			double thickness = 2;
+
+//			Stroke oldStroke = g.getStroke();
+//			g.setStroke(new BasicStroke(thickness));
+			
+//			g.setColor(Color.WHITE);
+
+//			g.setColor(Color.WHITE);
+//			g.drawLine((int)x, (int)y, (int)w, (int)h);
 			System.out.println("Drawn at x: "+x+" and y: "+y);
 		}else {
 			try {
