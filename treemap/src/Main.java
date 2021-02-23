@@ -1,6 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Point2D;
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,11 +14,14 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import com.sun.jdi.Field;
+
 public class Main extends JFrame {
 
     private Vis mainPanel;
     // default
 	String filepath = "C:\\Users\\sethv\\OneDrive\\Desktop\\Job Application";
+	File f;
 
     public Main() {
 
@@ -31,6 +35,8 @@ public class Main extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Put the title of your program here");
         setVisible(true);
+        
+        f = new File(filepath);
         
     }
 
@@ -57,7 +63,8 @@ public class Main extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Just clicked menu item 1");
-                mainPanel.setFilePath(filepath);
+                mainPanel.file =f;
+//                mainPanel.setFilePath(filepath);
 
             }
         });
@@ -68,7 +75,9 @@ public class Main extends JFrame {
                 JFileChooser chooser = new JFileChooser();
                 chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 chooser.showDialog(mainPanel,"Open");
-
+                File tf = chooser.getSelectedFile();
+//                filepath = tf;
+                System.out.println(tf);
             }
         });
         
