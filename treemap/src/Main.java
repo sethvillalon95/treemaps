@@ -54,7 +54,7 @@ public class Main extends JFrame {
         JMenuItem item3 = new JMenuItem("File Type");
         JMenuItem item4 = new JMenuItem("Last Date Modified");
         JMenuItem item5 = new JMenuItem("Nothing");
-        JMenuItem item6 = new JMenuItem("extra");
+        JMenuItem item6 = new JMenuItem("Random Fun");
         JMenuItem item7 = new JMenuItem("extra");
 
 
@@ -129,11 +129,14 @@ public class Main extends JFrame {
         });
         
         
-        //Age vs GPA
+        //Random Fun;
         item6.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	
+                f = new File(filepath);
+                root = new Node(f, 3);
+                mainPanel.setRoot(root);
+                repaint();
             }
         });
         

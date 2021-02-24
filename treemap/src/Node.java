@@ -7,15 +7,6 @@ import java.awt.MultipleGradientPaint.ColorSpaceType;
 import java.io.File;
 import java.util.ArrayList;
 
-
-
-
-
-
-
-
-
-
 public class Node {
 	
 	// the list of the children nodes
@@ -97,13 +88,14 @@ public class Node {
 			// do for the file type;
 			if(colorScheme==1) {
 				System.out.println(name+" Hello>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-
 				myColor = fileScheme();
 			}else if(colorScheme ==2) {
 				myColor = fileAgeScheme();
-			}else {
+			}else if(colorScheme==3) {
+				myColor = randomScheme();
+			}
+			else {
 				 myColor = Color.WHITE;
-
 			}
 			g.setColor(myColor);
 			g.fillRect((int)x, (int)y, (int)w, (int)h);
@@ -145,6 +137,8 @@ public class Node {
 //		return size;
 //	}
 
+
+
 	public void printAll() {
 		// TODO Auto-generated method stub
 	System.out.println("name: "+name + " size: "+ size);
@@ -172,7 +166,64 @@ public class Node {
 		System.out.println("Color scheme from Node is " + colorScheme);
 		
 	}
-	
+		
+	public Color randomScheme() {
+		double r = Math.random()*10;
+		int n =(int) r;
+		Color color = Color.white;
+
+		switch (n) {
+			case 1:
+				//
+				color = Color.BLUE;	
+				return color;
+//				break;
+			case 2:
+				//
+				color = Color.CYAN;
+				return color;
+//				break;
+			case 3:
+				// 
+				color=Color.MAGENTA;
+				return color;
+//				break;
+			case 4:
+				//
+				color = Color.ORANGE;
+				return color;
+//				break;
+			case 5:
+				//
+				color = Color.GREEN;
+				return color;
+//				break;
+			case 6:
+				//
+				color = Color.PINK;
+				return color;
+//				break;
+			case 7:
+				//
+				color = Color.RED;
+				return color;
+//				break;
+			case 8:
+				//
+				color = Color.YELLOW;
+				return color;
+//				break;
+			case 9:
+				//
+				color = Color.GRAY;
+				return color;
+//				break;
+			default:
+				//
+				color = Color.darkGray;
+				return color;
+		}
+	}
 	public Color fileScheme( ) {
 		System.out.println("I was called");
 		Color color = Color.white;
@@ -256,7 +307,7 @@ public class Node {
 
 					
 		}
-
 		
 	}
+
 }
