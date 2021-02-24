@@ -3,10 +3,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
+import java.awt.MultipleGradientPaint.ColorSpaceType;
 import java.io.File;
 import java.util.ArrayList;
 
-import javax.swing.text.rtf.RTFEditorKit;
+
 
 
 
@@ -20,12 +21,14 @@ public class Node {
 	// the list of the children nodes
 	private ArrayList<Node> children;
 	int colorScheme;
+	File rootFile;
 	
 	
 	String name =""; 
 	double size = 0;
 	double folderSize = 0;
 	boolean isFile;
+	long lastModified;
 	Orientation horizontal = Orientation.HORIZONTAL;
 	Orientation vertical = Orientation.VERTICAL;
 	public Node() {
@@ -37,6 +40,7 @@ public class Node {
 //		name = f.getName();
 		children = new ArrayList<>();
 		isFile = false;
+		rootFile = f;
 		
 		
 		if(f.isFile()) {
@@ -61,13 +65,17 @@ public class Node {
 			}
 			
 		}
+		lastModified =rootFile.lastModified()%10;
+
 		test(f);
 	}
 	
 	public void test(File tf) {
 		if(isFile) {
-			System.out.println("Name: "+ name+" colorScheme " +colorScheme);
+			int test = (int)lastModified;
+			
 
+			System.out.println(test+" Name: "+ name+" colorScheme " +colorScheme);
 		}else {
 			String folderName= tf.getName();
 //			System.out.println("The folder name is "+ folderName);
@@ -84,15 +92,17 @@ public class Node {
 //		Graphics2D g = (Graphics2D)g1;
 		System.out.println("Drawing");
 		if (isFile) {//file
-			Color myRedColor = Color.WHITE;
+			Color myColor = Color.WHITE;
 			
 			// do for the file type;
 			if(colorScheme==1) {
-				System.out.println("Hello>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+				System.out.println(name+" Hello>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
-				myRedColor = fileScheme();
+				myColor = fileScheme();
+			}else if(colorScheme ==2) {
+				myColor = fileAgeScheme();
 			}
-			g.setColor(myRedColor);
+			g.setColor(myColor);
 			g.fillRect((int)x, (int)y, (int)w, (int)h);
 
 
@@ -160,7 +170,7 @@ public class Node {
 		
 	}
 	
-	public Color fileScheme() {
+	public Color fileScheme( ) {
 		System.out.println("I was called");
 		Color color = Color.white;
 		if(name.endsWith(".doc")){
@@ -184,6 +194,66 @@ public class Node {
 			color = Color.RED;
 		}
 		return color;
+		
+	}
+	public Color fileAgeScheme() {
+		int n = (int)lastModified;
+		Color color = Color.white;
+
+		switch (n) {
+			case 1:
+				//
+				color = Color.BLUE;	
+				return color;
+//				break;
+			case 2:
+				//
+				color = Color.CYAN;
+				return color;
+//				break;
+			case 3:
+				// 
+				color=Color.MAGENTA;
+				return color;
+//				break;
+			case 4:
+				//
+				color = Color.ORANGE;
+				return color;
+//				break;
+			case 5:
+				//
+				color = Color.GREEN;
+				return color;
+//				break;
+			case 6:
+				//
+				color = Color.PINK;
+				return color;
+//				break;
+			case 7:
+				//
+				color = Color.RED;
+				return color;
+//				break;
+			case 8:
+				//
+				color = Color.YELLOW;
+				return color;
+//				break;
+			case 9:
+				//
+				color = Color.GRAY;
+				return color;
+//				break;
+			default:
+				//
+				color = Color.darkGray;
+				return color;
+
+					
+		}
+
 		
 	}
 }

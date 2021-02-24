@@ -90,19 +90,24 @@ public class Main extends JFrame {
             }
         });
         
+        // change the the color scheme by file type
         item3.addActionListener(e -> {
         	 System.out.println("Just pressed 3");
              f = new File(filepath);
              root = new Node(f, 1);
              mainPanel.setRoot(root);
-             repaint();
         	 repaint();
         	 
         });
         
+        //change color by lastModified;
         item4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                f = new File(filepath);
+                root = new Node(f, 2);
+                mainPanel.setRoot(root);
+                repaint();
 
             }
         });
