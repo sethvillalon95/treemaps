@@ -101,6 +101,9 @@ public class Node {
 				myColor = fileScheme();
 			}else if(colorScheme ==2) {
 				myColor = fileAgeScheme();
+			}else {
+				 myColor = Color.WHITE;
+
 			}
 			g.setColor(myColor);
 			g.fillRect((int)x, (int)y, (int)w, (int)h);

@@ -52,8 +52,8 @@ public class Main extends JFrame {
         JMenuItem item1 = new JMenuItem("Item 1");
         JMenuItem item2 = new JMenuItem("Item 2");
         JMenuItem item3 = new JMenuItem("File Type");
-        JMenuItem item4 = new JMenuItem("Permission");
-        JMenuItem item5 = new JMenuItem("Last Date Modified");
+        JMenuItem item4 = new JMenuItem("Last Date Modified");
+        JMenuItem item5 = new JMenuItem("Nothing");
         JMenuItem item6 = new JMenuItem("extra");
         JMenuItem item7 = new JMenuItem("extra");
 
@@ -84,6 +84,10 @@ public class Main extends JFrame {
                 // show open dialog method
                 chooser.showDialog(mainPanel,"Open");
                 File tf = chooser.getSelectedFile();
+                root = new Node(tf, 0);
+                filepath = tf.getAbsolutePath();
+                mainPanel.setRoot(root);
+           	 	repaint();
                 // pass in
 //                filepath = tf;
                 System.out.println(tf);
@@ -112,11 +116,14 @@ public class Main extends JFrame {
             }
         });
         
-
+        // Nothing
         item5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                f = new File(filepath);
+                root = new Node(f, 0);
+                mainPanel.setRoot(root);
+                repaint();
 
             }
         });
