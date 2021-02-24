@@ -6,6 +6,11 @@ import java.awt.Stroke;
 import java.io.File;
 import java.util.ArrayList;
 
+import javax.swing.text.rtf.RTFEditorKit;
+
+
+
+
 
 
 
@@ -14,6 +19,8 @@ public class Node {
 	
 	// the list of the children nodes
 	private ArrayList<Node> children;
+	int colorScheme;
+	
 	
 	String name =""; 
 	double size = 0;
@@ -25,10 +32,12 @@ public class Node {
 		System.out.println("from Node");
 	}
 	
-	public Node(File f) {
+	public Node(File f, int colorS) {
+		colorScheme = colorS;
 //		name = f.getName();
 		children = new ArrayList<>();
 		isFile = false;
+		
 		
 		if(f.isFile()) {
 			name = f.getName();
@@ -42,7 +51,7 @@ public class Node {
 //				System.out.println("Folder Size is : "+folderSize);
 				File[] kids = f.listFiles();
 				for(var k: kids) {
-					Node a = new Node(k);
+					Node a = new Node(k,colorScheme);
 					children.add(a);
 					size+=a.size;
 				}
@@ -57,13 +66,13 @@ public class Node {
 	
 	public void test(File tf) {
 		if(isFile) {
-			System.out.println("Name: "+ name);
+			System.out.println("Name: "+ name+" colorScheme " +colorScheme);
 
 		}else {
 			String folderName= tf.getName();
-			System.out.println("The folder name is "+ folderName);
+//			System.out.println("The folder name is "+ folderName);
 			folderSize = tf.length();
-			System.out.println("Folder Size is : "+folderSize);
+//			System.out.println("Folder Size is : "+folderSize);
 
 
 //			folderName
@@ -73,60 +82,39 @@ public class Node {
 	public void draw(Graphics g, double x, double y,double w, double h, Orientation o) {
 		// to do later. 
 //		Graphics2D g = (Graphics2D)g1;
+		System.out.println("Drawing");
 		if (isFile) {//file
-			g.setColor(Color.red);
-//			g.drawRect((int)x, (int)y, (int)w, (int)h);
+			Color myRedColor = Color.WHITE;
+			
+			// do for the file type;
+			if(colorScheme==1) {
+				System.out.println("Hello>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
+				myRedColor = fileScheme();
+			}
+			g.setColor(myRedColor);
 			g.fillRect((int)x, (int)y, (int)w, (int)h);
 
-//			g.setColor(Color.red);
-//			g.fillRect((int)x, (int)y, (int)w, (int)h);
-//			
-//			double thickness = 2;
 
-//			Stroke oldStroke = g.getStroke();
-//			g.setStroke(new BasicStroke(thickness));
-			
-//			g.setColor(Color.WHITE);
 
-//			g.setColor(Color.WHITE);
-//			g.drawLine((int)x, (int)y, (int)w, (int)h);
-			System.out.println("Drawn at x: "+x+" and y: "+y);
 		}else {//folder
 			try {
 				if(o==horizontal) { 
-//					double childWidth=0;
-//					System.out.println(horizontal);
 					double pixByte = w/size;
-//					double pixByte = ;
-
-//					System.out.println("The w is :"+w+" the folderSize is "+folderSize+"<<<<<<<<<<<<<<<<<<<<<After line 78>>>>>>>>>>");
-					System.out.println("pixByte is: "+pixByte + " <<<<<<<<<<<<<<<<<Line 79>>>>>>>>>>>>>>>>>");
-
 					for(var c: children) {
 						double childWidth = pixByte*c.size;
-						System.out.println("The name is :"+c.name+" pixByte is: "+pixByte + " c size is: "+ c.size+"ChilcWidth is :"+childWidth);
-//						x+=childWidth;
 						System.out.println(y);
-
 						c.draw(g, x, y, childWidth, h, vertical);
 						x+=childWidth+1;
-//						System.out.println("x is : "+x+ "y is: "+ y);
 					}
 				}else {
-//					double childHeight=0;
-//					System.out.println(horizontal);
 					double pixByte = h/size; 
-//					double pixByte = size/h; 
 
 					for(var c: children) {
 						double childHeight = pixByte*c.size;
-						System.out.println("x is "+x +"and y is "+y);
-//						y+=childHeight;
-						System.out.println("Child height "+ childHeight);
 
 						System.out.println(y);
 						c.draw(g, x, y, w, childHeight, horizontal);
-//						uncomment later
 						y+=childHeight+1;
 					}
 				}
@@ -152,6 +140,50 @@ public class Node {
 			n.printAll();
 		}
 	}
+		
+	}
+	public Color getColor() {
+		Color color = null;
+		if(colorScheme==1) {
+			if(name.endsWith(".doc")) {
+				color = Color.BLUE;
+			}
+		}
+		return color;
+	}
+	
+	
+	
+	public void setColorScheme(int sc) {
+		colorScheme = sc;
+		System.out.println("Color scheme from Node is " + colorScheme);
+		
+	}
+	
+	public Color fileScheme() {
+		System.out.println("I was called");
+		Color color = Color.white;
+		if(name.endsWith(".doc")){
+			color = Color.BLUE;			
+		}else if(name.endsWith(".docx")) {
+			color = Color.BLUE;
+		}
+		else if(name.endsWith(".pdf")) {
+			color = Color.CYAN;
+			
+		}else if(name.endsWith(".JPG")) {
+			color=Color.MAGENTA;
+			
+		}else if(name.endsWith(".xlsx")) {
+			color = Color.ORANGE;
+		}else if(name.endsWith(".zip")) {
+			color = Color.GREEN;
+		}else if(name.endsWith(".exe")) {
+			color = Color.PINK;
+		}else {
+			color = Color.RED;
+		}
+		return color;
 		
 	}
 }

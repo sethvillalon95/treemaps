@@ -11,8 +11,8 @@ public class AllNodes {
 	}
 	
 	public void newNode(File f) {
-		Node n = new Node(f);
-		Nodes.add(n);
+//		Node n = new Node(f);
+//		Nodes.add(n);
 	}
 	
 	public void clearNodes() {

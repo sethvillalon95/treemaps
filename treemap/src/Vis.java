@@ -27,6 +27,7 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
     private String textToDisplay;
     private String filepath;
 //    AllNodes nodes;
+    int colorScheme;
     Node root; 
     Orientation orientation;
     File file;
@@ -40,7 +41,7 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
 //        textToDisplay = "There's nothing to see here.";
         addMouseListener(this);
         addMouseMotionListener(this);
-        filepath = "";
+        filepath = ""; 
 //        nodes = new AllNodes();
         Orientation orientation = Orientation.HORIZONTAL;
         
@@ -50,6 +51,7 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
         }
 
         file = new File(filepath);
+        colorScheme = 0;
     }
     
     public void setFilePath(String fp) {
@@ -72,7 +74,7 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
         
 
         //draw blank background
-        g.setColor(Color.WHITE);
+        g.setColor(Color.BLACK);
         g.fillRect(0, 0, getWidth(), getHeight());
 
         //render visualization
@@ -81,8 +83,19 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
         final double h = getHeight();
         final double w = getWidth();
 //        File f = new File(filepath);
-        root = new Node(file);
-        root.draw(g, 0, 0, w, h, orientation.HORIZONTAL);
+//        root = new Node(file);
+//        if(colorScheme==1) {
+//        	root.fileScheme();
+//        }
+//        root.setColorScheme(colorScheme);
+        
+//        System.out.println("Root Color Scheme "+root.colorScheme);
+        try {
+            root.draw(g, 0, 0, w, h, orientation.HORIZONTAL);
+
+        }catch (Exception e) {
+			// TODO: handle exception
+		}
 //        nodes.draw(g, 0, 0, w, h, orientation.HORIZONTAL);
 //        nodes.printSize();
 //        nodes.clearNodes();
@@ -131,8 +144,14 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
 //        setToolTipText(s);
     }
     
-    
+    public void setScheme(int sc) {
+    	colorScheme = sc;
+    	System.out.println("Color Scheme is " +colorScheme); 
+    }
 
+    public void setRoot(Node r) {
+    	root =r;
+    }
 
 
     

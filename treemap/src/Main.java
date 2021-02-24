@@ -20,8 +20,10 @@ public class Main extends JFrame {
 
     private Vis mainPanel;
     // default
+    Node root;
 	String filepath = "C:\\Users\\sethv\\OneDrive\\Desktop\\Job Application";
 	File f;
+	int colorScheme;
 
     public Main() {
 
@@ -30,13 +32,12 @@ public class Main extends JFrame {
 
         mainPanel = new Vis();
         setContentPane(mainPanel);
-
+        colorScheme = 0;
         setSize(800,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Put the title of your program here");
         setVisible(true);
         
-        f = new File(filepath);
         
     }
 
@@ -47,13 +48,14 @@ public class Main extends JFrame {
         //instantiate menubar, menus, and menu options
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
+        JMenu colorSchemeMenu = new JMenu("Color Scheme");
         JMenuItem item1 = new JMenuItem("Item 1");
         JMenuItem item2 = new JMenuItem("Item 2");
-        JMenuItem item3 = new JMenuItem("Credits attempted vs. Credits passed");
-        JMenuItem item4 = new JMenuItem("Credits attempted vs. GPA");
-        JMenuItem item5 = new JMenuItem("Credits passed vs. GPA");
-        JMenuItem item6 = new JMenuItem("Age vs GPA");
-        JMenuItem item7 = new JMenuItem("Your choice");
+        JMenuItem item3 = new JMenuItem("File Type");
+        JMenuItem item4 = new JMenuItem("Permission");
+        JMenuItem item5 = new JMenuItem("Last Date Modified");
+        JMenuItem item6 = new JMenuItem("extra");
+        JMenuItem item7 = new JMenuItem("extra");
 
 
 
@@ -63,8 +65,12 @@ public class Main extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Just clicked menu item 1");
-                mainPanel.file =f;
+                f = new File(filepath);
+                root = new Node(f, colorScheme);
+                mainPanel.setRoot(root);
                 repaint();
+//              mainPanel.file =f;
+
 //                mainPanel.setFilePath(filepath);
 
             }
@@ -85,6 +91,12 @@ public class Main extends JFrame {
         });
         
         item3.addActionListener(e -> {
+        	 System.out.println("Just pressed 3");
+             f = new File(filepath);
+             root = new Node(f, 1);
+             mainPanel.setRoot(root);
+             repaint();
+        	 repaint();
         	 
         });
         
@@ -126,11 +138,12 @@ public class Main extends JFrame {
         //now hook them all together
         fileMenu.add(item1);
         fileMenu.add(item2);
-        fileMenu.add(item3);
-        fileMenu.add(item4);
-        fileMenu.add(item5);
-        fileMenu.add(item6);
-        fileMenu.add(item7); 
+        fileMenu.add(colorSchemeMenu);
+        colorSchemeMenu.add(item3);
+        colorSchemeMenu.add(item4);
+        colorSchemeMenu.add(item5);
+        colorSchemeMenu.add(item6);
+        colorSchemeMenu.add(item7); 
         
         menuBar.add(fileMenu);
 
