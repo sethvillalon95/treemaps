@@ -9,6 +9,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.io.File;
+import java.io.FileDescriptor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -18,6 +19,7 @@ import java.util.Collections;
 
 
 import javax.swing.JPanel;
+
 
 
 
@@ -138,10 +140,17 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
-//        String s =dots.attributes(x,y);
-//        setToolTipText(s);
+        try{
+        	int x = e.getX();
+        	int y = e.getY();
+            Node n = root.getNodeAt(x, y);
+            String s = n.rootFile.getAbsolutePath();
+            System.out.println("s is"+s);
+            setToolTipText(s);
+        }catch (Exception excep) {
+			// TODO: handle exception
+		}
+        
     }
     
     public void setScheme(int sc) {

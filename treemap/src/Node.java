@@ -7,14 +7,20 @@ import java.awt.MultipleGradientPaint.ColorSpaceType;
 import java.io.File;
 import java.util.ArrayList;
 
+
+
 public class Node {
 	
 	// the list of the children nodes
 	private ArrayList<Node> children;
 	int colorScheme;
 	File rootFile;
-	
-	
+	int left;
+	int top; 
+	//top+height;
+	int bottom;
+	// left+width;
+	int right; 
 	String name =""; 
 	double size = 0;
 	double folderSize = 0;
@@ -99,7 +105,10 @@ public class Node {
 			}
 			g.setColor(myColor);
 			g.fillRect((int)x, (int)y, (int)w, (int)h);
-
+			left = (int)x;
+			top = (int)y;
+			bottom = top+(int)h;
+			right = left+(int)w;
 
 
 		}else {//folder
@@ -138,7 +147,7 @@ public class Node {
 //	}
 
 
-
+	
 	public void printAll() {
 		// TODO Auto-generated method stub
 	System.out.println("name: "+name + " size: "+ size);
@@ -309,5 +318,33 @@ public class Node {
 		}
 		
 	}
+	public Node getNodeAt(int posx, int posy) {
+		try{
+			Node result = this;
+			for(var c: children) {
+				if(c.contains(posx, posy)) {
+					result = c.getNodeAt(posx, posy);
+				}
+				
+			}
+			return result;
+		}catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+		
 
+	}
+	
+	public ArrayList<Node> childrenNodes() {
+		return children;
+	}
+	
+	public boolean contains(int x, int y) {
+		
+		if(x>left && y>top && x<right&&y<bottom) {
+			return true;
+		}
+		return false;
+	}
 }
